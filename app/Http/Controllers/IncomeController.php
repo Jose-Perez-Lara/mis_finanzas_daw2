@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Income;
 
 class IncomeController extends Controller
 {
@@ -17,14 +18,11 @@ class IncomeController extends Controller
                 'category',
                 'amount'
             ],
-            'data' => [
-                ['12/12/2012', 'salary', '2500'],
-                ['12/01/2013', 'salary', '2500'],
-                ['12/02/2013', 'salary', '2550']
-            ]
-
+            'data' => []
         ];
-        //Aquí la lógica de negocio para el index
+        Income::all()->each(function ($item) use (&$tableData) {
+            $tableData['data'][$item->id] = [$item->date, $item->category, $item->amount];
+        });
         return view('income.index', ['title' => 'My incomes', 'tableData' => $tableData]);
     }
 
