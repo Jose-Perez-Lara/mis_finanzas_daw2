@@ -31,8 +31,7 @@ class IncomeController extends Controller
      */
     public function create()
     {
-        //
-        return '<p>Esta es la página del create de incomes</p>';
+        return view('income.create', ['title' => 'Create an Income', 'route' => route('incomes.create')]);
     }
 
     /**
@@ -40,7 +39,12 @@ class IncomeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $income = new Income;
+        $income->category = $request->category;
+        $income->date = $request->date;
+        $income->amount = $request->amount;
+        $income->save();
+        return redirect(route('incomes.index'));
     }
 
     /**

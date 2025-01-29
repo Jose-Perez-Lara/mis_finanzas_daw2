@@ -31,7 +31,7 @@ class OutcomeController extends Controller
      */
     public function create()
     {
-        //
+        return view('outcome.create', ['title' => 'Create an Outcome', 'route' => route('outcomes.create')]);
     }
 
     /**
@@ -39,7 +39,12 @@ class OutcomeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $income = new Outcome;
+        $income->category = $request->category;
+        $income->date = $request->date;
+        $income->amount = $request->amount;
+        $income->save();
+        return redirect(route('outcomes.index'));
     }
 
     /**
