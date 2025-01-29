@@ -16,5 +16,6 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
 
         $this->call(IncomeSeeder::class);
+        $this->call(OutcomeSeeder::class);
     }
 }
