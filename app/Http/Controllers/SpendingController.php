@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Outcome;
+use App\Models\Spending;
 use Illuminate\Http\Request;
 
-class OutcomeController extends Controller
+class SpendingController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,10 +20,10 @@ class OutcomeController extends Controller
             ],
             'data' => []
         ];
-        Outcome::all()->each(function ($item) use (&$tableData) {
+        Spending::all()->each(function ($item) use (&$tableData) {
             $tableData['data'][$item->id] = [$item->date, $item->category, $item->amount];
         });
-        return view('outcome.index', ['title' => 'My Outcomes', 'tableData' => $tableData]);
+        return view('spending.index', ['title' => 'My Spendings', 'tableData' => $tableData]);
     }
 
     /**
@@ -31,7 +31,7 @@ class OutcomeController extends Controller
      */
     public function create()
     {
-        return view('outcome.create', ['title' => 'Create an Outcome', 'route' => route('outcomes.create')]);
+        return view('Spending.create', ['title' => 'Create an Spending', 'route' => route('spendings.create')]);
     }
 
     /**
@@ -39,18 +39,18 @@ class OutcomeController extends Controller
      */
     public function store(Request $request)
     {
-        $income = new Outcome;
+        $income = new Spending;
         $income->category = $request->category;
         $income->date = $request->date;
         $income->amount = $request->amount;
         $income->save();
-        return redirect(route('outcomes.index'));
+        return redirect(route('spendings.index'));
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Outcome $outcome)
+    public function show(Spending $Spending)
     {
         //
     }
@@ -58,7 +58,7 @@ class OutcomeController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Outcome $outcome)
+    public function edit(Spending $Spending)
     {
         //
     }
@@ -66,7 +66,7 @@ class OutcomeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Outcome $outcome)
+    public function update(Request $request, Spending $Spending)
     {
         //
     }
@@ -74,7 +74,7 @@ class OutcomeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Outcome $outcome)
+    public function destroy(Spending $Spending)
     {
         //
     }

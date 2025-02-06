@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IncomeController;
-use App\Http\Controllers\OutcomeController;
+use App\Http\Controllers\SpendingController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -14,6 +14,6 @@ Route::get('/incomes/create', [IncomeController::class, 'create'])->name('income
 Route::post('/incomes/create', [IncomeController::class, 'store']);
 
 
-Route::get('/outcomes', [OutcomeController::class, 'index'])->name('outcomes.index');
-Route::get('/outcomes/create', [OutcomeController::class, 'create'])->name('outcomes.create');
-Route::post('/outcomes/create', [OutcomeController::class, 'store']);
+Route::get('/spending', [SpendingController::class, 'index'])->name('spending.index');
+Route::get('/spending/create', [SpendingController::class, 'create'])->name('spending.create');
+Route::post('/spending/create', [SpendingController::class, 'store']);
