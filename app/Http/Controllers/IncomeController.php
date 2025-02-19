@@ -21,9 +21,9 @@ class IncomeController extends Controller
             'data' => []
         ];
         Income::all()->each(function ($item) use (&$tableData) {
-            $tableData['data'][$item->id] = [$item->date, $item->category, $item->amount];
+            $tableData['data'][$item->id] = ['date' => $item->date, 'category' => $item->category, 'amount' => $item->amount, 'id' => $item->id];
         });
-        return view('income.index', ['title' => 'My incomes', 'tableData' => $tableData]);
+        return view('income.index', ['title' => 'My incomes', 'tableData' => $tableData, 'name' => 'incomes']);
     }
 
     /**
@@ -39,11 +39,12 @@ class IncomeController extends Controller
      */
     public function store(Request $request)
     {
-        $income = new Income;
-        $income->category = $request->category;
-        $income->date = $request->date;
-        $income->amount = $request->amount;
-        $income->save();
+        $request->validate([
+            'category' => 'required',
+            'date' => 'required|date',
+            'amount' => 'required'
+        ]);
+        Income::create(['category' => $request->category, 'date' => $request->date, 'amount' => $request->amount]);
         return redirect(route('incomes.index'));
     }
 
@@ -62,7 +63,7 @@ class IncomeController extends Controller
     public function edit(string $id)
     {
         //
-        return '<p>Esta es la página del edit de incomes</p>';
+        return view('income.edit', ['title' => 'Update an Income', 'route' => route('incomes.update', ['id' => $id]), 'resource' => Income::find($id)]);
     }
 
     /**
@@ -70,8 +71,9 @@ class IncomeController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
-
+        $income = Income::find($id);
+        $income->update(['category' => $request->category, 'date' => $request->date, 'amount' => $request->amount]);
+        return redirect(route('incomes.index'));
     }
 
     /**
@@ -79,6 +81,7 @@ class IncomeController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Income::destroy($id);
+        return redirect(route('incomes.index'));
     }
 }

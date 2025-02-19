@@ -9,4 +9,9 @@ class Spending extends Model
 {
     /** @use HasFactory<\Database\Factories\SpendingFactory> */
     use HasFactory;
+    protected $fillable = [
+        'category',
+        'date',
+        'amount'
+    ];
 }

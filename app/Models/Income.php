@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Income extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'category',
+        'date',
+        'amount'
+    ];
 }

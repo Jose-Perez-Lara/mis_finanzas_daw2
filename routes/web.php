@@ -12,8 +12,14 @@ Route::get('/', function () {
 Route::get('/incomes', [IncomeController::class, 'index'])->name('incomes.index');
 Route::get('/incomes/create', [IncomeController::class, 'create'])->name('incomes.create');
 Route::post('/incomes/create', [IncomeController::class, 'store']);
+Route::get('/incomes/edit/{id}', [IncomeController::class, 'edit'])->name('incomes.edit');
+Route::put('/incomes/{id}', [IncomeController::class, 'update'])->name('incomes.update');
+Route::delete('/incomes/delete/{id}', [IncomeController::class, 'destroy'])->name('incomes.delete');
 
 
-Route::get('/spending', [SpendingController::class, 'index'])->name('spending.index');
-Route::get('/spending/create', [SpendingController::class, 'create'])->name('spending.create');
-Route::post('/spending/create', [SpendingController::class, 'store']);
+Route::get('/spendings', [SpendingController::class, 'index'])->name('spendings.index');
+Route::get('/spendings/create', [SpendingController::class, 'create'])->name('spendings.create');
+Route::post('/spendings/create', [SpendingController::class, 'store']);
+Route::get('/spendings/{id}', [SpendingController::class, 'edit'])->name('spendings.edit');
+Route::put('/spendings/{id}', [SpendingController::class, 'update'])->name('spendings.update');
+Route::delete('/spendings/delete/{id}', [SpendingController::class, 'destroy'])->name('spendings.delete');
