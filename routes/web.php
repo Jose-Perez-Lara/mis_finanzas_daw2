@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IncomeController;
 use App\Http\Controllers\SpendingController;
@@ -23,3 +24,6 @@ Route::post('/spendings/create', [SpendingController::class, 'store']);
 Route::get('/spendings/{id}', [SpendingController::class, 'edit'])->name('spendings.edit');
 Route::put('/spendings/{id}', [SpendingController::class, 'update'])->name('spendings.update');
 Route::delete('/spendings/delete/{id}', [SpendingController::class, 'destroy'])->name('spendings.delete');
+
+Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
+Route::get('/categories/{id}', [CategoryController::class, 'show'])->name('categories.show');

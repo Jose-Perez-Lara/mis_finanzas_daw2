@@ -3,13 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Category;
 use App\Models\Income;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class IncomeController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+
     public function index()
     {
         $tableData = [
@@ -21,9 +24,9 @@ class IncomeController extends Controller
             'data' => []
         ];
         Income::all()->each(function ($item) use (&$tableData) {
-            $tableData['data'][$item->id] = ['date' => $item->date, 'category' => $item->category, 'amount' => $item->amount, 'id' => $item->id];
+            $tableData['data'][$item->id] = ['date' => $item->date, 'category' => $item->category->name, 'amount' => $item->amount, 'id' => $item->id];
         });
-        return view('income.index', ['title' => 'My incomes', 'tableData' => $tableData, 'name' => 'incomes']);
+        return view('income.index', ['title' => 'My Incomes', 'tableData' => $tableData, 'name' => 'incomes']);
     }
 
     /**

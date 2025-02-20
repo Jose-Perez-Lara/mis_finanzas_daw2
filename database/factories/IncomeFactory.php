@@ -16,13 +16,13 @@ class IncomeFactory extends Factory
      */
     public function definition(): array
     {
-        $category = $this->faker->numberBetween(1, 2);
         $date = $this->faker->dateTimeBetween('-7 week');
         $amount = $this->faker->randomNumber(4);
+        $category_id = $this->faker->numberBetween(1, 3);
         return [
             'date' => $date,
             'amount' => $amount,
-            'category' => $category == 1 ? 'salario' : 'bizum',
+            'category_id' => $category_id,
         ];
     }
 }
